@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('contacts', [ContactController::class, 'contacts']);
+Route::post('save_contact',[ContactController::class,'saveContact']);

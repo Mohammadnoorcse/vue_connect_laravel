@@ -11,13 +11,13 @@
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody v-for="contact in contacts" :key="contact.id">
                 <tr class="table-secondary">
-                    <th scope="row">1</th>
-                    <th scope="row">2</th>
-                    <th scope="row">3</th>
-                    <th scope="row">4</th>
-                    <th scope="row">5</th>
+                    <th scope="row">{{contact.id}}</th>
+                    <th scope="row">{{contact.name}}</th>
+                    <th scope="row">{{contact.email}}</th>
+                    <th scope="row">{{contact.designation}}</th>
+                    <th scope="row">{{contact.contact_no}}</th>
                 </tr>
             </tbody>
         </table>
@@ -37,7 +37,8 @@ const fetchContacts = async () => {
   let url = 'http://127.0.0.1:8000/api/contacts';
   try {
     const response = await axios.get(url);
-    contacts.value = response.data.contacts; // Assign data to reactive variable
+     contacts.value = response.data.contacts; // Assign data to reactive variable
+    // console.log(response.data.contacts)
   } catch (err) {
     error.value = err.message || 'Error fetching data';
     console.error(err);
