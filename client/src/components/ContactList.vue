@@ -8,6 +8,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Designation</th>
                     <th scope="col">Contact</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
 
@@ -18,6 +19,7 @@
                     <th scope="row">{{contact.email}}</th>
                     <th scope="row">{{contact.designation}}</th>
                     <th scope="row">{{contact.contact_no}}</th>
+                    <th scope="row"><button class="btn btn-danger btn-sm" @click.prevent= "deleteContact(contact.id)">Delete</button></th>
                 </tr>
             </tbody>
         </table>
@@ -44,6 +46,22 @@ const fetchContacts = async () => {
     console.error(err);
   } finally {
     loading.value = false; // End loading state
+  }
+};
+
+// Delete contact method
+const deleteContact = async (id) => {
+  const confirmDelete = confirm('Are you sure you want to delete this contact?');
+  if (!confirmDelete) return;
+
+  try {
+    await axios.delete(`http://127.0.0.1:8000/api/delete_contact/${id}`);
+    // Remove contact from local list
+    // contacts.value = contacts.value.filter((contact) => contact.id !== id);
+    alert('Contact deleted successfully!');
+  } catch (error) {
+    console.error('Failed to delete contact:', error.response || error.message);
+    alert('Failed to delete contact. Please try again.');
   }
 };
 

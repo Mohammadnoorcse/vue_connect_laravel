@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 Route::get('contacts', [ContactController::class, 'contacts']);
 Route::post('save_contact',[ContactController::class,'saveContact']);
+Route::post('delete_contact/{id}',[ContactController::class,'deleteContact']);
